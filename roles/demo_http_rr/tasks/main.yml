@@ -6,13 +6,13 @@
     name: httpd
     state: latest
 
-- name: Copy the content over
+- name: Copy index.html over
   copy: 
     src: index.html
     dest: /var/www/html/index.html
     mode: 0755
 
-- name: Copy the content over
+- name: Copy animated gif over
   copy: 
     src: rr.gif
     dest: /var/www/html/rr.gif
@@ -24,7 +24,7 @@
     state: started
     enabled: true
 
-- name: Configure firewall
+- name: Configure and start firewall
   firewalld:
     service: "{{ item }}"
     permanent: yes
