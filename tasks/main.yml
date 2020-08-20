@@ -1,0 +1,36 @@
+---
+# tasks file for demo_http_rr
+
+- name: Install httpd
+  yum:
+    name: httpd
+    state: latest
+
+- name: Copy the content over
+  copy: 
+    src: index.html
+    dest: /var/www/html/index.html
+    mode: 0755
+
+- name: Copy the content over
+  copy: 
+    src: rr.gif
+    dest: /var/www/html/rr.gif
+    mode: 0555
+
+- name: Enable/Start httpd
+  service:
+    name: httpd
+    state: started
+    enabled: true
+
+- name: Configure firewall
+  firewalld:
+    service: "{{ item }}"
+    permanent: yes
+    state: enabled
+    immediate: yes
+  with_items:
+      - https
+      - http
+
