@@ -1,0 +1,5 @@
+---
+- name: Run the ansible role
+  hosts: all
+  roles:
+    - demo_http_rr
